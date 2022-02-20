@@ -7,10 +7,7 @@ var store = {
   race_id: undefined,
 };
 
-
 // Mario Kart tracks:
-
- 
 
 // Rainbow Road
 
@@ -22,13 +19,7 @@ var store = {
 
 // Banshee Boardwalk
 
- 
-
- 
-
 // Best characters:
-
- 
 
 // Mario - top speed- 500, acceleration 8
 
@@ -40,7 +31,9 @@ var store = {
 
 // Luigi - top speed- 460, acceleration 10
 
- 
+const updateStore = (store, newState) => {
+  store = Object.assign(store, newState);
+};
 // We need our javascript to wait until the DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
   onPageLoad();
@@ -118,12 +111,12 @@ async function handleCreateRace() {
 
     if (!track_id) {
       alert("Please choose your track");
-	  return;
-    } 
-	
-	if (!player_id) {
+      return;
+    }
+
+    if (!player_id) {
       alert("Please choose a player");
-	  return;
+      return;
     }
 
     // const race = TODO - invoke the API call to create the race, then save the result
@@ -133,7 +126,8 @@ async function handleCreateRace() {
 
     // TODO - update the store with the race id
 
-    store.race_id = Number(race.id - 1);
+    // store.race_id = Number(race.id - 1);
+    updateStore(store, race.id - 1);
     // For the API to work properly, the race id should be race id - 1
 
     // store.race_id = Number(race_id -1)
@@ -146,7 +140,7 @@ async function handleCreateRace() {
     startRace();
 
     // TODO - call the async function runRace
-    runRace()
+    runRace();
   } catch (error) {
     console.log("We were unable to create your race");
     console.log(error);
@@ -156,7 +150,7 @@ async function handleCreateRace() {
 function runRace(raceID) {
   return new Promise((resolve) => {
     // TODO - use Javascript's built in setInterval method to get race info every 500ms
-    setInterval
+    setInterval;
     /* 
 		TODO - if the race info status property is "in-progress", update the leaderboard by calling:
 
@@ -186,10 +180,9 @@ async function runCountdown() {
     let timer = 3;
 
     return new Promise((resolve) => {
+      // setTimeout
 
-		// setTimeout
-
-    setTimeOut()
+      setTimeOut();
       // TODO - use Javascript's built in setInterval method to count down once per second
 
       // run this DOM manipulation to decrement the countdown for the user
@@ -215,6 +208,8 @@ function handleSelectPodRacer(target) {
   target.classList.add("selected");
 
   // TODO - save the selected racer to the store
+
+  store.player_id = target.id;
 }
 
 function handleSelectTrack(target) {
@@ -234,13 +229,18 @@ function handleSelectTrack(target) {
 
 function handleAccelerate() {
   console.log("accelerate button clicked");
+
+  const {player_id} = store;
   // TODO - Invoke the API call to accelerate
+  accelerate(player_id);
 }
 
 // HTML VIEWS ------------------------------------------------
 // Provided code - do not remove
 
 function renderRacerCars(racers) {
+
+  const {id,Racer,top_speed,acceleration,handling} = racer;
   if (!racers.length) {
     return `
 			<h4>Loading Racers...</4>
@@ -251,7 +251,7 @@ function renderRacerCars(racers) {
 
   return `
 		<ul id="racers">
-			${reuslts}
+			${results}
 		</ul>
 	`;
 }
@@ -389,15 +389,18 @@ function defaultFetchOpts() {
 
 function getTracks() {
   // GET request to `${SERVER}/api/tracks`
-  fetch(`${SERVER}/api/tracks`).then(response => response.json).then(console.log('tracks')).catch((err) => console.log("Problem with tracks request::", err) );
-
+  return fetch(`${SERVER}/api/tracks`)
+    .then((res) => res.json())
+    .then(tracks => console.log(tracks))
+    .catch((err) => console.log("Problem with tracks request::", err));
 }
 
 function getRacers() {
   // GET request to `${SERVER}/api/cars`
-  fetch(`${SERVER}/api/cars`).then(response => response.json).then(console.log('cars')).catch((err) => console.log("Problem with cars request::", err) );
-
-
+  return fetch(`${SERVER}/api/cars`)
+    .then((res) => res.json())
+    .then(cars => console.log(cars))
+    .catch((err) => console.log("Problem with cars request::", err));
 }
 
 function createRace(player_id, track_id) {
@@ -417,9 +420,10 @@ function createRace(player_id, track_id) {
 
 function getRace(id) {
   // GET request to `${SERVER}/api/races/${id}`
-  fetch(`${SERVER}/api/races/${id}`).then(response => response.json).then(console.log('races')).catch((err) => console.log("Problem with cars request::", err) );
-
-
+  return fetch(`${SERVER}/api/races/${id}`)
+    .then((res) => res.json())
+    .then(races => console.log(races))
+    .catch((err) => console.log("Problem with cars request::", err));
 }
 
 function startRace(id) {
@@ -436,10 +440,10 @@ function accelerate(id) {
 
   return fetch(`${SERVER}/api/races/${id}/accelerate`, {
     method: "POST",
-    ...defaultFetchOpts()
-    
-  })
-  .catch((err) => console.log("Problem with getting acceleration request::", err));
+    ...defaultFetchOpts(),
+  }).catch((err) =>
+    console.log("Problem with getting acceleration request::", err)
+  );
   // options parameter provided as defaultFetchOpts
   // no body or datatype needed for this request
 }
