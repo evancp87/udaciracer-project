@@ -425,7 +425,7 @@ function getTracks() {
     ...defaultFetchOpts(),
   })
     .then((res) => res.json())
-    .then((tracks) => console.log(tracks))
+    // .then((tracks) => console.log(tracks))
     .catch((err) => console.log("Problem with tracks request::", err));
 }
 
@@ -436,7 +436,7 @@ function getRacers() {
     ...defaultFetchOpts(),
   })
     .then((res) => res.json())
-    .then((cars) => console.log(cars))
+    // .then((cars) => console.log(cars))
     .catch((err) => console.log("Problem with cars request::", err));
 }
 
@@ -462,7 +462,7 @@ function getRace(id) {
     ...defaultFetchOpts(),
   })
     .then((res) => res.json())
-    .then((races) => console.log(races))
+    // .then((races) => console.log(races))
     .catch((err) => console.log("Problem with cars request::", err));
 }
 
@@ -472,7 +472,7 @@ function startRace(id) {
     ...defaultFetchOpts(),
   })
     .then(res => res.json())
-    .catch((err) => console.log("Problem with getRace request::", err));
+    .catch((err) => console.log("Problem with start race request::", err));
 }
 
 function accelerate(id) {
@@ -482,7 +482,7 @@ function accelerate(id) {
     method: "POST",
     ...defaultFetchOpts(),
   }).catch((err) =>
-    console.log("Problem with getting acceleration request::", err)
+    console.log("Problem with acceleration request::", err)
   );
   // options parameter provided as defaultFetchOpts
   // no body or datatype needed for this request
