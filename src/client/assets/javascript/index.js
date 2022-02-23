@@ -132,7 +132,7 @@ async function handleCreateRace() {
     // const race = TODO - invoke the API call to create the race, then save the result
     const race = await createRace(store.track_id, store.player_id);
 
-    renderAt("#race", renderRaceStartView(race.track));
+    renderAt("#race", renderRaceStartView(race.trackName));
 
     // TODO - update the store with the race id
 
@@ -251,7 +251,7 @@ function handleSelectTrack(target) {
 
   // add class selected to current target
   target.classList.add("selected");
-
+console.log(selected);
   // TODO - save the selected track id to the store
 
  updateStore(store, {track_id: target.id});
@@ -293,7 +293,6 @@ function renderRacerCard(racer) {
 			<p>${top_speed}</p>
 			<p>${acceleration}</p>
 			<p>${handling}</p>
-      <button>Select</button>
 		</li>
 	`;
 }
@@ -336,7 +335,7 @@ function renderRaceStartView(track, racers) {
   
   return `
 		<header>
-			<h1>Race: ${track.name}</h1>
+			<h1>Race: ${trackName[name]}}</h1>
 		</header>
 		<main id="two-columns">
 			<section id="leaderBoard">
