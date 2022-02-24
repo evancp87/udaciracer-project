@@ -16,6 +16,7 @@ const racerName = {
   "Racer 4": "Toad",
   "Racer 5": "Luigi",
 }
+
 const trackName = {
   "Track 1": "Rainbow Road",
   "Track 2": "DK Mountain",
@@ -25,18 +26,6 @@ const trackName = {
   "Track 6": "Banshee Boardwalk",
 }
 
-
-// Best characters:
-
-// Mario - top speed- 500, acceleration 8
-
-// Peach - top speed- 410, acceleration 7
-
-// Yoshi - top speed- 460, acceleration 8
-
-// Toad - top speed- 500, acceleration 8
-
-// Luigi - top speed- 460, acceleration 10
 
 const updateStore = (store, newState) => {
   store = Object.assign(store, newState);
@@ -158,7 +147,7 @@ async function handleCreateRace() {
 function runRace(raceID) {
   return new Promise((resolve) => {
     // TODO - use Javascript's built in setInterval method to get race info every 500ms
-    let interval = setInterval(async () => {
+    let interval = setInterval( () => {
       /* 
       TODO - if the race info status property is "in-progress", update the leaderboard by calling:
       
@@ -166,17 +155,19 @@ function runRace(raceID) {
       
       renderAt('#leaderBoard', raceProgress(res.positions))
       */
-      let currentRace = await getRace(raceID);
-      if (currentRace.status === "in-progress") {
-        renderAt("#leaderBoard", raceProgress(res.positions));
-      }
+      let currentRace =  getRace(raceID);
+      return currentRace
+      .then(currentRace => {
 
-      if (currentRace.status === "finished") {
-        clearInterval(interval);
-        renderAt("#race", resultsView(res.positions)); // to render the results view
-        resolve(interval); // resolve the promise
-      }
-    }).catch((err) =>
+        if (currentRace.status === "in-progress") {
+          renderAt("#leaderBoard", raceProgress(currentRace.positions));
+        } else if (currentRace.status === "finished") {
+          clearInterval(interval);
+          renderAt("#race", resultsView(currentRace.positions)); // to render the results view
+          resolve(interval); // resolve the promise
+        }
+        
+      }).catch((err) =>
       console.log("There was a problem getting your race", err)
     );
     /* 
@@ -190,6 +181,8 @@ function runRace(raceID) {
 	*/
   }, 500);
   // remember to add error handling for the Promise
+}
+)
 }
 
 async function runCountdown() {
@@ -262,7 +255,7 @@ function handleAccelerate() {
 
   const player_id = store.player_id;
   // TODO - Invoke the API call to accelerate
-  accelerate(player_id).then(() => console.log("accelerate button clicked")).catch(error => console.log(error));
+  accelerate(store.player_id).then(() => console.log("accelerate button clicked")).catch(error => console.log(error));
 }
 
 // HTML VIEWS ------------------------------------------------
