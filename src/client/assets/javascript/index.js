@@ -119,7 +119,7 @@ async function handleCreateRace() {
     }
 
     // const race = TODO - invoke the API call to create the race, then save the result
-    const race = await createRace(store.track_id, store.player_id);
+    const race = await createRace(track_id, player_id);
 
     renderAt("#race", renderRaceStartView(race.trackName));
 
