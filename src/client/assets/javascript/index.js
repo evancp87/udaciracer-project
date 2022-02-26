@@ -120,13 +120,16 @@ async function handleCreateRace() {
 
     // const race = TODO - invoke the API call to create the race, then save the result
     const race = await createRace(track_id, player_id);
+    console.log(race);
 
     renderAt("#race", renderRaceStartView(race.trackName));
 
     // TODO - update the store with the race id
 
-    // store.race_id = Number(race.id - 1);
-    updateStore(store, race.id - 1);
+    // store.race_id = Number(race.ID - 1);
+    // updateStore(store, race.ID - 1);
+    updateStore(store, {race_id: race.ID - 1});
+    console.log(store);
     // For the API to work properly, the race id should be race id - 1
 
     // The race has been created, now start the countdown
@@ -156,6 +159,7 @@ function runRace(raceID) {
       renderAt('#leaderBoard', raceProgress(res.positions))
       */
       let currentRace =  getRace(raceID);
+      console.log(currentRace);
       return currentRace
       .then(currentRace => {
 
@@ -248,6 +252,7 @@ console.log(selected);
   // TODO - save the selected track id to the store
 
  updateStore(store, {track_id: target.id});
+ console.log(store);
 }
 
 function handleAccelerate() {
