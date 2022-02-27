@@ -168,7 +168,7 @@ function runRace(raceID) {
         } else if (currentRace.status === "finished") {
           clearInterval(interval);
           renderAt("#race", resultsView(currentRace.positions)); // to render the results view
-          resolve(interval); // resolve the promise
+          resolve(currentRace); // resolve the promise
         }
         
       }).catch((err) =>
@@ -260,7 +260,7 @@ function handleAccelerate() {
 
   const player_id = store.player_id;
   // TODO - Invoke the API call to accelerate
-  accelerate(store.player_id).then(() => console.log("accelerate button clicked")).catch(error => console.log(error));
+  accelerate(player_id).then(() => console.log("accelerate button clicked")).catch(error => console.log(error));
 }
 
 // HTML VIEWS ------------------------------------------------
@@ -468,7 +468,7 @@ function startRace(id) {
     method: "POST",
     ...defaultFetchOpts(),
   })
-    .then(res => res.json())
+    // .then(res => res.json())
     .catch((err) => console.log("Problem with start race request::", err));
 }
 
