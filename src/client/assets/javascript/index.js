@@ -260,7 +260,7 @@ function handleAccelerate() {
 
   const player_id = store.player_id;
   // TODO - Invoke the API call to accelerate
-  accelerate(player_id).then(() => console.log("accelerate button clicked")).catch(error => console.log(error));
+  accelerate(store.track_id - 1).then(() => console.log("accelerate button clicked")).catch(error => console.log(error));
 }
 
 // HTML VIEWS ------------------------------------------------
