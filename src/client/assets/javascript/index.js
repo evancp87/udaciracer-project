@@ -11,7 +11,7 @@ let store = {
 const racerName = {
   "Racer 1": "Mario",
   "Racer 2": "Yoshi",
-  "Racer 3": "Princess Peach",
+  "Racer 3": "Peach",
   "Racer 4": "Toad",
   "Racer 5": "Luigi",
 }
@@ -310,7 +310,6 @@ function renderCountdown(count) {
 // renders the start of the race after countdown finishes
 function renderRaceStartView(track, racers) {
 
-
   return `
 		<header>
 			<h1>Race: ${trackName[track]} </h1>
@@ -346,17 +345,21 @@ function resultsView(positions) {
 }
 
 function raceProgress(positions) {
+
+
   let userPlayer = positions.find((e) => e.id === parseInt(store.player_id));
   userPlayer.driver_name += " (you)";
+// console.log(driver_name)
 
   positions = positions.sort((a, b) => (a.segment > b.segment ? -1 : 1));
   let count = 1;
 
   const results = positions.map((p) => {
+    // if (p.id === store.player_id) {
     return `
 			<tr>
 				<td>
-					<h3>${count++} - ${p.driver_name}</h3>
+					<h3>${count++} - ${racerName[p.driver_name]}</h3>
 				</td>
 			</tr>
 		`;
@@ -366,7 +369,7 @@ function raceProgress(positions) {
 		<main>
 			<h3>Leaderboard</h3>
 			<section id="leaderBoard">
-				${results}
+				${results.join("")}
 			</section>
 		</main>
 	`;
