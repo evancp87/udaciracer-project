@@ -21,7 +21,7 @@ const trackName = {
   "Track 1": "Rainbow Road",
   "Track 2": "DK Mountain",
   "Track 3": "Yoshi Valley",
-  "Track 4": "Bowsers Castle",
+  "Track 4": "Bowser's Castle",
   "Track 5": "Royal Raceway",
   "Track 6": "Banshee Boardwalk",
 }
