@@ -21,7 +21,7 @@ const trackName = {
   "Track 1": "Rainbow Road",
   "Track 2": "DK Mountain",
   "Track 3": "Yoshi Valley",
-  "Track 4": "Bowser's Castle",
+  "Track 4": "Bowsers Castle",
   "Track 5": "Royal Raceway",
   "Track 6": "Banshee Boardwalk",
 }
@@ -260,7 +260,7 @@ function handleAccelerate() {
 
   const player_id = store.player_id;
   // TODO - Invoke the API call to accelerate
-  accelerate(store.track_id - 1).then(() => console.log("accelerate button clicked")).catch(error => console.log(error));
+  accelerate(store.race_id).then(() => console.log("accelerate button clicked")).catch(error => console.log(error));
 }
 
 // HTML VIEWS ------------------------------------------------
@@ -287,10 +287,10 @@ function renderRacerCard(racer) {
 
   return `
 		<li class="card podracer" id="${id}">
-			<h3>${racerName[driver_name]}</h3>
-			<p>${top_speed}</p>
-			<p>${acceleration}</p>
-			<p>${handling}</p>
+			<h3>${racerName[driver_name]}<span><img class='racer-icon' src='/assets/images/${racerName[driver_name]}.png'> </span></h3>
+			<p>Top Speed: ${top_speed}</p>
+			<p>Acceleration: ${acceleration}</p>
+			<p>Handling: ${handling}</p>
 		</li>
 	`;
 }
@@ -317,6 +317,7 @@ function renderTrackCard(track) {
   return `
 		<li id="${id}" class="card track">
 			<h3>${trackName[name]}</h3>
+      <img class="trackcard-images" src="/assets/images/${trackName[name]}.jpg" alt="${trackName[name]}">
 		</li>
 	`;
 }
@@ -330,10 +331,10 @@ function renderCountdown(count) {
 
 function renderRaceStartView(track, racers) {
 
-  
+
   return `
 		<header>
-			<h1>Race: ${trackName[name]}}</h1>
+			<h1>Race: ${trackName[track]}}</h1>
 		</header>
 		<main id="two-columns">
 			<section id="leaderBoard">
