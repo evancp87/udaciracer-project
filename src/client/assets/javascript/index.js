@@ -312,7 +312,7 @@ function renderRaceStartView(track, racers) {
 
   return `
 		<header>
-			<h1>Race: ${trackName[track]} </h1>
+			<h1>Race: ${trackName[name]} </h1>
 		</header>
 		<main id="two-columns">
 			<section id="leaderBoard">
@@ -355,11 +355,21 @@ function raceProgress(positions) {
   let count = 1;
 
   const results = positions.map((p) => {
-    // if (p.id === store.player_id) {
+    if (p.id === parseInt(store.player_id)) {
+      return `
+			<tr>
+				<td>
+					<h3>${count++} - ${p.driver_name}<span>  <img class='progress-racer-icon' src='/assets/images/${racerName[p.driver_name]}.png'>
+          </span></h3>
+				</td>
+			</tr>
+		`;
+    } else
     return `
 			<tr>
 				<td>
-					<h3>${count++} - ${racerName[p.driver_name]}</h3>
+					<h3>${count++} - ${racerName[p.driver_name]} <span>  <img class='racer-icon' src='/assets/images/${racerName[p.driver_name]}.png'>
+            </span></h3>
 				</td>
 			</tr>
 		`;
