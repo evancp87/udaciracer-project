@@ -123,7 +123,7 @@ async function handleCreateRace() {
     const race = await createRace(track_id, player_id);
     console.log(race);
 
-    renderAt("#race", renderRaceStartView(race.trackName));
+    renderAt("#race", renderRaceStartView(race.Track));
 
     // updates the store with the race id
 
@@ -312,7 +312,7 @@ function renderRaceStartView(track, racers) {
 
   return `
 		<header>
-			<h1>Race: ${trackName[name]} </h1>
+			<h1>Race: ${trackName[track.name]} </h1>
 		</header>
 		<main id="two-columns">
 			<section id="leaderBoard">
@@ -348,23 +348,22 @@ function raceProgress(positions) {
 
 
   let userPlayer = positions.find((e) => e.id === parseInt(store.player_id));
-  userPlayer.driver_name += " (you)";
-// console.log(driver_name)
+  userPlayer.driver_name[racerName] += " (you)";
 
   positions = positions.sort((a, b) => (a.segment > b.segment ? -1 : 1));
   let count = 1;
 
   const results = positions.map((p) => {
-    if (p.id === parseInt(store.player_id)) {
-      return `
-			<tr>
-				<td>
-					<h3>${count++} - ${p.driver_name}<span>  <img class='progress-racer-icon' src='/assets/images/${racerName[p.driver_name]}.png'>
-          </span></h3>
-				</td>
-			</tr>
-		`;
-    } else
+    // if (p.id === parseInt(store.player_id)) {
+    //   return `
+		// 	<tr>
+		// 		<td>
+		// 			<h3>${count++} - ${p.driver_name}<span>  <img class='progress-racer-icon' src='/assets/images/${p.driver_name}.png'>
+    //       </span></h3>
+		// 		</td>
+		// 	</tr>
+		// `;
+    // } else
     return `
 			<tr>
 				<td>
