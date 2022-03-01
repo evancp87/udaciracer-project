@@ -6,6 +6,10 @@ header {
   background-image: url('../Images/mario-kart-hero.jpg');
   
 }
+#create-race {
+display: flex;
+flex-direction: column;
+align-items: center;
 
 @media (max-width: 564px) {
   #tracks {
@@ -19,10 +23,6 @@ header {
     align-items: center;
   }
 
-  #create-race {
-display: flex;
-flex-direction: column;
-align-items: center;
 
   }
 }
@@ -47,12 +47,6 @@ align-items: center;
     margin-left: 50px;
   }
 
-  #create-race {
-    display: flex;
-    
-    justify-content: center;
-    
-      }
   } 
 
 /* -------------------  TABLET  --------------------- */
