@@ -46,6 +46,13 @@ align-items: center;
     font-size: 40px;
     margin-left: 50px;
   }
+
+  #create-race {
+    display: flex;
+    
+    justify-content: center;
+    
+      }
   } 
 
 /* -------------------  TABLET  --------------------- */
