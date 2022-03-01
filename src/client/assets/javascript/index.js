@@ -1,6 +1,6 @@
 
 // The store will hold all information needed globally
-let store = {
+const store = {
   track_id: undefined,
   player_id: undefined,
   race_id: undefined,
@@ -148,8 +148,8 @@ async function handleCreateRace() {
 function runRace(raceID) {
   return new Promise((resolve) => {
     // setInterval method gets race info every 500ms
-    let interval = setInterval( () => {
-      let currentRace =  getRace(raceID);
+    const interval = setInterval( () => {
+      const currentRace =  getRace(raceID);
       console.log(currentRace);
       return currentRace
       .then(currentRace => {
@@ -347,8 +347,8 @@ function resultsView(positions) {
 function raceProgress(positions) {
 
 
-  let userPlayer = positions.find((e) => e.id === parseInt(store.player_id));
-  userPlayer.driver_name[racerName] += " (you)";
+  const userPlayer = positions.find((e) => e.id === parseInt(store.player_id));
+  userPlayer.driver_name[racerName[name]] += " (you)";
 
   positions = positions.sort((a, b) => (a.segment > b.segment ? -1 : 1));
   let count = 1;
